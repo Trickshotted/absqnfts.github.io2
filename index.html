@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<head>
+    <title>Absq NFTs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="test.css">
+    <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb.js"></script>
+    <script src="databaseHandler.js"></script>
+</head>
+<html>
+<body onload="getNFTs()">
+    <div class="navbar">
+        <label><i style="color: #383aba;" class="fa-solid fa-cubes"></i><a style="margin-left: 10px;">AbsqNFTs</label><button id="mint">Mint NFT</button>
+      </div>
+    <div id="content" class="container">
+
+
+
+    </div>
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span><br>
+          <h1><u>Mint NFT</u></h1><br><br>
+        <h3>Upload NFT (CTRL + V or Upload File)</h3><br>
+        <input type="file" id="file"><br><br>
+        <img class="previewImg" id="previewpaste"><br><br>
+        <h3>Name</h3><br>
+        <input id="name" class="uploadInput" type="text"><br><br>
+        <h3>Uploader</h3><br>
+        <input id="owner" class="uploadInput" type="text"><br><br>
+        <h3>Price  <i style="font-size: 20px; color: #6121cf; margin-left: 3px;" class="fa-brands fa-ethereum"></i></h3><br>
+        <input id="price" style="width: 97%;" class="uploadInput" type="number"><br><br>
+        <button onclick="uploadNFT()">Mint!</button>
+        </div>
+      
+      </div>
+  </body>
+  <script>
+      var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("mint");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+let image = ""
+        let url = ""
+        const file = document.getElementById("file")
+
+
+        file.addEventListener("change", ev => {
+            image = ev.target.files[0]
+            document.getElementById("previewpaste").src = URL.createObjectURL(image);
+            console.log(image)
+        })
+
+
+
+  window.addEventListener("paste", function(e){
+    var item = Array.from(e.clipboardData.items).find(x => /^image\//.test(x.type));
+      
+    var blob = item.getAsFile();
+
+    var img = new Image();
+
+
+    document.getElementById("previewpaste").src = URL.createObjectURL(blob);
+    console.log(blob)
+    image = blob
+});
+
+
+  </script>
+  </html>
+  
