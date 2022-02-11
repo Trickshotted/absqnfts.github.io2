@@ -30,7 +30,7 @@ function getNFTs(){
                     <img class="img" src="` + nfts[i].image + `" /><br><br>
                 <h3>` + nfts[i].name + `</h3>
                 <h4 style="color: #8a939b;">Owned by <font style="color:#2081e2;">` + nfts[i].owner + `</font></h4><br><br>
-            <span style=\"position: absolute; bottom: 10px;\"><i style="font-size: 18px; color: #6121cf" class="fa-brands fa-ethereum"></i> ` + nfts[i].price + `</span>
+            <span><i style="font-size: 18px; color: #6121cf" class="fa-brands fa-ethereum"></i> ` + nfts[i].price + `</span>
         </div>
         
         `
