@@ -19,10 +19,21 @@ body {
 	font-family: var(--base-font);
 }
 
-img {
+.img {
 	width: 100%;
 	vertical-align: top;
 	border-radius: 5px;
+	cursor: pointer;
+	max-height: 200px;
+
+}
+
+
+.img2 {
+	width: 100%;
+	vertical-align: top;
+	border-radius: 5px;
+	max-height: 500px;
 
 }
 
@@ -38,7 +49,7 @@ img {
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 40px;
-	position: relative;
+
 }
 
 
@@ -48,14 +59,42 @@ img {
 	padding: 17px;
 	border-radius: 10px;
 	background-color: #171718;
-	overflow-x: hidden;
+	text-overflow: ellipsis;
 	color: var(--white);
 	font-size: 18px;
+	position: relative;
 
 	@media screen and (max-width: 440px) {
 		max-width: 100%;
 	}
 
+}
+
+#wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+
+#left {
+	flex: 0 0 50%;
+	text-align: center;
+	padding: 10px;
+  }
+  
+  #right {
+	flex: 1;
+	text-align: left;
+	padding: 10px;
+	overflow: auto;
+	position: relative;
+	
+  }
+
+
+.product-card span{
+	position:absolute;                 
+                bottom:10px;                         
 }
 
 
@@ -79,7 +118,7 @@ align-items: center;
   }
 
   .navbar button {
-	display: table;
+	display: inline-block;
 	color: #f2f2f2;
 	text-align: center;
 	font-size: 16px;
@@ -92,6 +131,7 @@ align-items: center;
 	border-radius: 5px;
 	cursor: pointer;
 	font-family: 'Karla';
+	z-index: 999;
 
   }
 
@@ -103,7 +143,7 @@ align-items: center;
   .modal {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
-	z-index: 99999; /* Sit on top */
+	z-index: 1; /* Sit on top */
 	padding-top: 100px; /* Location of the box */
 	left: 0;
 	top: 0;
@@ -111,6 +151,7 @@ align-items: center;
 	height: 100%; /* Full height */
 	overflow: auto; /* Enable scroll if needed */
 	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+	padding-bottom: 100px;
   }
   
   /* Modal Content */
@@ -120,7 +161,7 @@ align-items: center;
 	padding: 20px;
 	border: none;
 	border-radius: 10px;
-	width: 75%;
+	width: 50%;
 	color: white;
   }
   
@@ -174,6 +215,27 @@ align-items: center;
 
   }
 
+  .button {
+	display: inline-block;
+	color: #f2f2f2;
+	text-align: center;
+	font-size: 16px;
+	position: relative;
+	padding: 8px;
+	vertical-align: middle;
+	margin-right: 10px;
+	background-color: #383aba;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-family: 'Karla';
+	margin-bottom: 10px;
+
+  }
+
   button:hover{
 	background-color: #2e2f94;
   }
+
+
+

@@ -3,14 +3,16 @@
     <title>Absq NFTs</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="test.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=0.7">
     <script src="databaseHandler.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
 </head>
 <html>
 <body onload="getNFTs()">
     <div class="navbar">
-        <label><i style="color: #383aba;" class="fa-solid fa-cubes"></i><a style="margin-left: 10px;">AbsqNFTs</label><button id="mint">Mint NFT</button>
+        <label><i style="color: #383aba;" class="fa-solid fa-cubes"></i><a style="margin-left: 10px;">AbsqNFTs</label><button id="mint">Mint NFT</button><button id="collection">Create Collection</button>
       </div>
     <div id="content" class="container">
 
@@ -21,21 +23,74 @@
 
         <!-- Modal content -->
         <div class="modal-content">
-          <span class="close">&times;</span><br>
+          <span id="closeCreate" class="close">&times;</span><br>
           <h1><u>Mint NFT</u></h1><br><br>
         <h3>Upload NFT (CTRL + V or Upload File)</h3><br>
         <input type="file" id="file"><br><br>
         <img class="previewImg" id="previewpaste"><br><br>
         <h3>Name</h3><br>
         <input id="name" class="uploadInput" type="text"><br><br>
+        <h3>Collection</h3><br>
+        <select id="collections">
+        </select><br><br>
         <h3>Uploader</h3><br>
         <input id="owner" class="uploadInput" type="text"><br><br>
+        <h3>Description</h3><br>
+        <input id="description" class="uploadInput" type="text"><br><br>
         <h3>Price  <i style="font-size: 20px; color: #6121cf; margin-left: 3px;" class="fa-brands fa-ethereum"></i></h3><br>
-        <input id="price" style="width: 97%;" class="uploadInput" type="number"><br><br>
+        <input  step="0.000001" id="price" style="width: 97%;" class="uploadInput" type="number"><br><br>
         <button onclick="uploadNFT()">Mint!</button>
         </div>
+
+
+        
       
       </div>
+
+
+      <div id="collectionCreate" class="modal">
+
+        <div class="modal-content">
+          <span id="collectionClose" class="close">&times;</span><br>
+          <h1><u>Create a Collection</u></h1><br><br>
+        <h3>Name</h3><br>
+        <input id="collectionName" class="uploadInput" type="text"><br><br>
+        <button onclick="createCollection()">Create!</button>
+        </div>
+
+
+        
+      
+      </div>
+
+
+      <div id="nftView" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span id="nftClose" class="close">&times;</span><br>
+          <div id="wrapper">
+          <div id="left">
+            <img class="img2" id="nftImage">
+          </div>
+          <div id="right">
+            <h2 style="font-size: 20px; color: #2081e2;" id="nftCollection">Loading...</h2><br>
+            <h1 id="nftName">Loading...</h1>
+            <h2 style="font-size: 20px; color: #8a939b;" id="nftOwner">Loading...</h2><br>
+            <h2 id="nftPrice" style="font-size: 20px;">Loading...</h2><br>
+            <span id="nftDescription">Test description</span><br><br>
+            <button class="button"  id="buyButton">Buy Now</button>
+            <button class="button"  id="sellButton">Sell Now</button>
+          </div>
+        </div>
+        </div>
+
+
+        
+      
+      </div>
+
+
   </body>
   <script>
       var modal = document.getElementById("myModal");
@@ -48,7 +103,12 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
+  document.getElementById("collections").innerHTML = ""
+  console.log(collectionList)
   modal.style.display = "block";
+  for (let i = 0; i < collectionList.length; i++) {
+  document.getElementById("collections").innerHTML = document.getElementById("collections").innerHTML +"<option value=\"" + collectionList[i].id + "\">" + collectionList[i].name + "</option>"
+  }
 }
 
 // When the user clicks on <span> (x), close the modal
@@ -88,6 +148,32 @@ let image = ""
     console.log(blob)
     image = blob
 });
+
+
+var modal2 = document.getElementById("collectionCreate");
+
+// Get the button that opens the modal
+var btn2 = document.getElementById("collection");
+
+// Get the <span> element that closes the modal
+var span2 = document.getElementById("collectionClose");
+
+// When the user clicks the button, open the modal 
+btn2.onclick = function() {
+  modal2.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span2.onclick = function() {
+  modal2.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal2) {
+    modal2.style.display = "none";
+  }
+}
 
 
   </script>
